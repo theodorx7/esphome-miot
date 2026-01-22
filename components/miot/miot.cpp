@@ -58,27 +58,27 @@ void Miot::setup() {
 
   queue_command("MIIO_mcu_version_req");
 
-  this->set_interval("poll", 60000, [this] {
-    std::string cmd, part;
-    cmd.reserve(MAX_LINE_LENGTH);
-    part.reserve(MAX_COMMAND_LENGTH);
-
-    for (auto it = listeners_.cbegin(); it != listeners_.cend(); ++it) {
-      if ((*it).second.poll) {
-        part = str_snprintf(" %" PRIu32 " %" PRIu32, 32, (*it).first.first, (*it).first.second);
-
-        if (cmd.size() + part.size() > MAX_COMMAND_LENGTH) {
-          queue_command("get_properties" + cmd);
-          cmd.clear();
-        }
-
-        cmd += part;
-      }
-    }
-
-    if (!cmd.empty())
-      queue_command("get_properties" + cmd);
-  });
+//  this->set_interval("poll", 60000, [this] {
+//    std::string cmd, part;
+//    cmd.reserve(MAX_LINE_LENGTH);
+//    part.reserve(MAX_COMMAND_LENGTH);
+//
+//    for (auto it = listeners_.cbegin(); it != listeners_.cend(); ++it) {
+//      if ((*it).second.poll) {
+//        part = str_snprintf(" %" PRIu32 " %" PRIu32, 32, (*it).first.first, (*it).first.second);
+//
+//        if (cmd.size() + part.size() > MAX_COMMAND_LENGTH) {
+//          queue_command("get_properties" + cmd);
+//          cmd.clear();
+//        }
+//
+//        cmd += part;
+//      }
+//    }
+//
+//    if (!cmd.empty())
+//      queue_command("get_properties" + cmd);
+//  });
 
   if (heartbeat_siid_ != 0 && heartbeat_piid_ != 0)
     this->set_interval("heartbeat", 60000, [this] {
