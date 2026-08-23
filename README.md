@@ -1,5 +1,12 @@
 ## ESPHome components for MIoT devices
 
+### Differences from upstream
+
+The only difference in this fork is that periodic polling of device properties is completely disabled. 
+The 60-second timer for sending get_properties requests has been removed from the code. The component no longer polls the MCU on a timer; instead, it updates states only upon receiving incoming events from the device itself (properties_changed) and processes external commands.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 These [ESPHome](https://esphome.io/) components are designed for [MIoT devices](https://home.miot-spec.com/) which adhere to the [Xiaomi MIoT Serial Communication](https://github.com/blakadder/miot) protocol.
 
 Such devices contain two microcontrollers, one actually controls the hardware (MCU), and the other acts as a LAN/cloud gateway.
