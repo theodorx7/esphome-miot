@@ -2,8 +2,9 @@
 
 ### Differences from upstream
 
-The only difference in this fork is that periodic polling of device properties is completely disabled. 
-The 60-second timer for sending get_properties requests has been removed from the code. The component no longer polls the MCU on a timer; instead, it updates states only upon receiving incoming events from the device itself (properties_changed) and processes external commands.
+The only difference is that component-level periodic polling is completely disabled. The built-in 60-second get_properties timer is removed. Any polling must now be implemented manually in the user's ESPHome YAML configuration (e.g., via interval blocks or scripts with explicit get_properties commands). This provides full control over when and how properties are queried.
+
+The poll flag and miot_poll YAML option remain in the code for compatibility but have no effect since the polling timer is disabled.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
