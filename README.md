@@ -2,9 +2,13 @@
 
 ### Differences from upstream
 
-The only difference is that component-level periodic polling is completely disabled. The built-in 60-second get_properties timer is removed. Any polling must now be implemented manually in the user's ESPHome YAML configuration (e.g., via interval blocks or scripts with explicit get_properties commands). This provides full control over when and how properties are queried.
+This fork completely disables component-level periodic polling by removing the built-in 60-second get_properties timer.
 
-The poll flag and miot_poll YAML option remain in the code for compatibility but have no effect since the polling timer is disabled.
+  - Manual Control: Any polling must now be explicitly configured in the user's ESPHome YAML.
+
+  - Global Disable (Fixes Fan): While standard components support miot_poll: false, the original fan component ignores this and polls anyway. This fork forces zero polling across all components, making it the only way to stop automatic requests for fan entities.
+
+  - Resource Savings: Removing the timer structure frees up a small amount of RAM.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
