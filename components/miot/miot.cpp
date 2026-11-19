@@ -59,6 +59,7 @@ void Miot::setup() {
 
   queue_command("MIIO_mcu_version_req");
 
+  /*
   this->set_interval("poll", poll_interval_ * 1000u, [this] {
     std::string cmd, part;
     cmd.reserve(MAX_LINE_LENGTH);
@@ -80,6 +81,7 @@ void Miot::setup() {
     if (!cmd.empty())
       queue_command("get_properties" + cmd);
   });
+*/
 
   if (heartbeat_siid_ != 0 && heartbeat_piid_ != 0)
     this->set_interval("heartbeat", 60000, [this] {
