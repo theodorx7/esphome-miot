@@ -1,5 +1,17 @@
 ## ESPHome components for MIoT devices
 
+### Differences from upstream
+
+This fork completely disables component-level periodic polling by removing the built-in 60-second get_properties timer.
+
+  - Manual Control: Any polling must now be explicitly configured in the user's ESPHome YAML.
+
+  - Global Disable (Fixes Fan): While standard components support miot_poll: false, the original fan component ignores this and polls anyway. This fork forces zero polling across all components, making it the only way to stop automatic requests for fan entities.
+
+  - Resource Savings: Removing the timer structure frees up a small amount of RAM.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 These [ESPHome](https://esphome.io/) components are designed for [MIoT devices](https://home.miot-spec.com/) which adhere to the [Xiaomi MIoT Serial Communication](https://github.com/blakadder/miot) protocol.
 
 Such devices contain two microcontrollers, one actually controls the hardware (MCU), and the other acts as a LAN/cloud gateway.
